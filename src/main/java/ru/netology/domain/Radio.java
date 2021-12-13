@@ -1,81 +1,66 @@
 package ru.netology.domain;
 
 public class Radio {
-// Требования к работе с радиостанциями:
-
-    int currentRadioStation;
+    private int currentRadioStation;
 
     public int getCurrentRadioStation() {
-        if (currentRadioStation < 0) {
-            return 0;
-        }
-        if (currentRadioStation > 9) {
-            return 0;
-        }
         return currentRadioStation;
     }
 
-    public int nextCurrentRadioStation() {
-        if (currentRadioStation >= 0 && currentRadioStation < 9) {
-            return currentRadioStation += 1;
-        }
-        if (currentRadioStation >= 9) {
-            return currentRadioStation = 0;
-        }
-        return nextCurrentRadioStation();
-    }
-
-    public int prevRadioStation() {
-        if (currentRadioStation > 0 && currentRadioStation <= 9) {
-            return currentRadioStation -= 1;
-        }
-        if (currentRadioStation == 0) {
-            return currentRadioStation = 9;
-        }
-        return prevRadioStation();
-    }
-
     public void setCurrentRadioStation(int currentRadioStation) {
-        if (currentRadioStation < 0) {
-            return;
-        }
         if (currentRadioStation > 9) {
-            return;
+            this.currentRadioStation = 0;
+        } else if (currentRadioStation < 0) {
+            this.currentRadioStation = 9;
+        } else {
+            this.currentRadioStation = currentRadioStation;
         }
-        this.currentRadioStation = currentRadioStation;
     }
 
-    // Требования к работе с громкостью радио:
-
-    int currentRadioVolume;
-
-    public int getCurrentRadioVolume() {
-        if (currentRadioVolume < 0) {
-            return 0;
-        }
-        if (currentRadioVolume > 10) {
-            return 0;
-        }
-        return currentRadioVolume;
+    public void setNextRadioStation() {
+        int nextRadioStation = currentRadioStation + 1;
+        setCurrentRadioStation(nextRadioStation);
     }
 
-    public int increaseVolume() {
-        if (currentRadioVolume >= 0 && currentRadioVolume < 10) {
-            return currentRadioVolume += 1;
-        }
-        if (currentRadioVolume >= 10) {
-            return currentRadioVolume = 10;
-        }
-        return increaseVolume();
+    public void setPrevRadioStation() {
+        int prevRadioStation = currentRadioStation - 1;
+        setCurrentRadioStation(prevRadioStation);
     }
 
-    public int reduceVolume() {
-        if (currentRadioVolume > 0 && currentRadioVolume <= 10) {
-            return currentRadioVolume -= 1;
+    public void setValidNumberRadioStation(int currentRadioStation) {
+        if (currentRadioStation > 9) {
+            System.out.println("Номер станции недопустим");
+        } else if (currentRadioStation < 0) {
+            System.out.println("Номер станции недопустим");
+        } else {
+            setCurrentRadioStation(currentRadioStation);
         }
-        if (currentRadioVolume == 0) {
-            return currentRadioVolume = 0;
+    }
+
+    private int currentVolume;
+
+    public int getCurrentVolume() {
+
+        return currentVolume;
+    }
+
+    public void setCurrentVolume(int currentVolume) {
+        if (currentVolume > 10) {
+            this.currentVolume = 10;
+        } else if (currentVolume < 0) {
+            this.currentRadioStation = 0;
+        } else {
+            this.currentVolume = currentVolume;
         }
-        return reduceVolume();
+    }
+
+    public void setNextVolume() {
+        int nextVolume = currentVolume + 1;
+        setCurrentVolume(nextVolume);
+    }
+
+    public void setPrevVolume() {
+        int prevVolume = currentVolume - 1;
+        setCurrentVolume(prevVolume);
     }
 }
