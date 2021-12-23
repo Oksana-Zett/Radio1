@@ -24,6 +24,17 @@ class RadioTest {
     }
 
     @Test
+    public void amountRadioStation () {
+        Radio radio = new Radio();
+        radio.setAmountRadioStation(20);//Создать количество радиостанций равное 20-ти
+        radio.setCurrentRadioStation(19);
+
+        int expected = 19;
+        int actual = radio.getCurrentRadioStation();
+        assertEquals(expected, actual);
+    }
+
+    @Test
     public void currentRadioStation() {
         Radio radio = new Radio();
         radio.setCurrentRadioStation(4);
@@ -57,7 +68,7 @@ class RadioTest {
     @Test
     public void nextRadioStationMax() {
         Radio radio = new Radio();
-        radio.setCurrentRadioStation(10);
+        radio.setCurrentRadioStation(9);
         radio.setNextRadioStation();
 
         int expected = 0;
@@ -71,7 +82,7 @@ class RadioTest {
         radio.setCurrentRadioStation(0);
         radio.setPrevRadioStation();
 
-        int expected = 10;
+        int expected = 9;
         int actual = radio.getCurrentRadioStation();
         assertEquals(expected, actual);
     }
